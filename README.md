@@ -3,6 +3,9 @@
   <br>
   Welcome to Twilio Media Stream Save Audio File<br>(For Node.js) 👋
 </h1>
+
+[![NPM](https://nodei.co/npm/twilio-media-stream-save-audio-file.png)](https://npmjs.org/package/twilio-media-stream-save-audio-file)
+
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-0.0.3-blue.svg?cacheSeconds=2592000" />
   <a href="#" target="_blank">
