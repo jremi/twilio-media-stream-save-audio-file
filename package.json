@@ -3,6 +3,9 @@
   "version": "0.0.3",
   "description": "Simple helper class for Node.js environment for saving Twilio Media Stream audio directly from Twilio to a local WAV format file.",
   "main": "index.js",
+  "files": [
+    "index.js"
+  ],
   "scripts": {
     "test": "mocha test.js"
   },
