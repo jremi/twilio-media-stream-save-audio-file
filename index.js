@@ -5,7 +5,7 @@ class TwilioMediaStreamSaveAudioFile {
     this.saveLocation = options.saveLocation || __dirname;
     this.saveFilename = options.saveFilename || Date.now();
     this.onSaved = options.onSaved || null;
-    this.websocket = null;
+    this.websocket = {};
   }
 
   get filename() {

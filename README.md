@@ -40,7 +40,7 @@ const mediaStreamSaver = new TwilioMediaStreamSaveAudioFile({
 wss.on("connection", (ws) => {
   console.log("New connection initiated!");
 
-  mediaStreamSaver.setWebsocket(ws);
+  mediaStreamSaver.setWebsocket(ws); // optional
 
   ws.on("message", (message) => {
     const msg = JSON.parse(message);
