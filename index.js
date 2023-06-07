@@ -5,7 +5,7 @@ class TwilioMediaStreamSaveAudioFile {
     this.saveLocation = options.saveLocation || __dirname;
     this.saveFilename = options.saveFilename || Date.now();
     this.onSaved = options.onSaved || null;
-    this.websocket = null;
+    this.wstream = null;
   }
 
   get filename() {
@@ -16,16 +16,12 @@ class TwilioMediaStreamSaveAudioFile {
     return `${this.saveLocation}/${this.filename}`;
   }
 
-  setWebsocket(websocket) {
-    this.websocket = websocket;
-  }
-
   twilioStreamStart() {
-    this.websocket.wstream = createWriteStream(this.writeStreamPath, {
+    this.wstream = createWriteStream(this.writeStreamPath, {
       encoding: "binary",
     });
     // This is a mu-law header for a WAV-file compatible with twilio format
-    this.websocket.wstream.write(
+    this.wstream.write(
       Buffer.from([
         0x52,
         0x49,
@@ -91,14 +87,14 @@ class TwilioMediaStreamSaveAudioFile {
 
   twilioStreamMedia(mediaPayload) {
     // decode the base64-encoded data and write to stream
-    this.websocket.wstream.write(Buffer.from(mediaPayload, "base64"));
+    this.wstream.write(Buffer.from(mediaPayload, "base64"));
   }
 
   twilioStreamStop() {
     // Now the only thing missing is to write the number of data bytes in the header
-    this.websocket.wstream.write("", () => {
-      let fd = openSync(this.websocket.wstream.path, "r+"); // `r+` mode is needed in order to write to arbitrary position
-      let count = this.websocket.wstream.bytesWritten;
+    this.wstream.write("", () => {
+      let fd = openSync(this.wstream.path, "r+"); // `r+` mode is needed in order to write to arbitrary position
+      let count = this.wstream.bytesWritten;
       count -= 58; // The header itself is 58 bytes long and we only want the data byte length
       writeSync(
         fd,
