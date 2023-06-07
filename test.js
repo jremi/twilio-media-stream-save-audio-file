@@ -45,5 +45,7 @@ describe('TwilioMediaStreamSaveAudioFile', () => {
     const filename = `${__dirname}/my-twilio-media-stream-output.wav`;
     const stats = await fs.promises.stat(filename);
     assert.equal(stats.size, 58138);
+
+    await fs.promises.unlink(filename)
   });
 });
