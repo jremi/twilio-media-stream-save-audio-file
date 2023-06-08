@@ -88,7 +88,7 @@ class TwilioMediaStreamSaveAudioFile {
   // @deprecated
   setWebsocket(websocket) {
     this.websocket = websocket
-  },
+  }
 
   twilioStreamMedia(mediaPayload) {
     // decode the base64-encoded data and write to stream
