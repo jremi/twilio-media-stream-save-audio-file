@@ -17,8 +17,6 @@ describe('TwilioMediaStreamSaveAudioFile', () => {
 
     mediaStreamSaver.setWebsocket({});
 
-    let twilioCallSid = null;
-    let count = 0;
     for await (const line of rl) {
       const msg = JSON.parse(line);
       switch (msg.event) {
