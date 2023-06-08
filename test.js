@@ -15,8 +15,6 @@ describe('TwilioMediaStreamSaveAudioFile', () => {
       onSaved: () => console.log("File was saved!"),
     });
 
-    mediaStreamSaver.setWebsocket({});
-
     for await (const line of rl) {
       const msg = JSON.parse(line);
       switch (msg.event) {

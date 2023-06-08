@@ -41,8 +41,6 @@ const mediaStreamSaver = new TwilioMediaStreamSaveAudioFile({
 wss.on("connection", (ws) => {
   console.log("New connection initiated!");
 
-  mediaStreamSaver.setWebsocket(ws);
-
   ws.on("message", (message) => {
     const msg = JSON.parse(message);
     switch (msg.event) {
@@ -80,8 +78,6 @@ When you instantiate the library you can pass in the following options. They are
 - `onSaved` - **(Optional)** This is a optional callback function that you can provide if you want to be notified when the audio wav file has been saved.
 
 ## Notes
-
-- Once your websocket has connected call `mediaStreamSaver.setWebsocket(ws)`. The `ws` is what is returned from the the websocket `connection` event.
 
 - Inside the connected websocket `message` event make sure to call each of the corresponding methods for the incoming Twilio Media Stream message events: 
 
