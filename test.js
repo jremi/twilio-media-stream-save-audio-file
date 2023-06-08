@@ -15,8 +15,6 @@ describe('TwilioMediaStreamSaveAudioFile', () => {
       onSaved: () => console.log("File was saved!"),
     });
 
-    let twilioCallSid = null;
-    let count = 0;
     for await (const line of rl) {
       const msg = JSON.parse(line);
       switch (msg.event) {
@@ -40,10 +38,11 @@ describe('TwilioMediaStreamSaveAudioFile', () => {
       }
     }
 
-    const filename = `${__dirname}/my-twilio-media-stream-output.wav`;
+    const { filename, writeStreamPath } = mediaStreamSaver;
+
     const stats = await fs.promises.stat(filename);
     assert.equal(stats.size, 58138);
 
-    await fs.promises.unlink(filename);
+    await fs.promises.unlink(writeStreamPath);
   });
 });
