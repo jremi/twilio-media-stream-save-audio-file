@@ -4,6 +4,12 @@ const readline = require('readline');
 const TwilioMediaStreamSaveAudioFile = require('.');
 
 describe('TwilioMediaStreamSaveAudioFile', () => {
+  const outputFilename = "my-twilio-media-stream-output";
+
+  before(async () => {
+    await fs.promises.unlink(`${__dirname}/${outputFilename}`).catch(() => {});
+  })
+
   it('saves a twilio media stream to a local audio file in wav format', async () => {
     const rl = readline.createInterface({
       input: fs.createReadStream(`${__dirname}/fixtures/hello-world.txt`),
@@ -11,7 +17,7 @@ describe('TwilioMediaStreamSaveAudioFile', () => {
 
     const mediaStreamSaver = new TwilioMediaStreamSaveAudioFile({
       saveLocation: __dirname,
-      saveFilename: "my-twilio-media-stream-output",
+      saveFilename: outputFilename,
       onSaved: () => console.log("File was saved!"),
     });
 
