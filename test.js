@@ -41,6 +41,7 @@ describe('TwilioMediaStreamSaveAudioFile', () => {
     const { filename, writeStreamPath } = mediaStreamSaver;
 
     const stats = await fs.promises.stat(filename);
+    console.log('Stats:', stats)
     assert.equal(stats.size, 58138);
 
     await fs.promises.unlink(writeStreamPath);
